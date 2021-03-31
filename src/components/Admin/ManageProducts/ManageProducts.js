@@ -1,5 +1,6 @@
 import { makeStyles, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
+import Spinner from '../../Spinner/Spinner';
 import SingleProductRow from './SingleProductRow';
 
 const useStyles = makeStyles({
@@ -34,7 +35,14 @@ const ManageProducts = () => {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {products.map(product => <SingleProductRow key={product._id} product={product} />)}
+                            {
+                                products.length
+                                ? (
+                                    products.map(product => <SingleProductRow key={product._id} product={product} />)
+                                ): (
+                                    <Spinner />
+                                )
+                            }
                         </TableBody>
                     </Table>
                 </TableContainer>

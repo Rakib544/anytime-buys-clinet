@@ -28,7 +28,7 @@ const SingleProductCart = ({ product }) => {
         history.push(`/checkout/${id}`)
     }
     return (
-        <Grid item lg={3}>
+        <Grid item lg={3} md={4} sm={6} xs={12}>
             <Paper className={classes.paper}>
                 <ButtonBase>
                     <img src={imageURL} alt={productName} className={classes.img} />

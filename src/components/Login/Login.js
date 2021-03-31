@@ -1,4 +1,4 @@
-import { Button, makeStyles } from '@material-ui/core';
+import { Button, Container, Grid, makeStyles, Paper, TableCell, Typography } from '@material-ui/core';
 import React, { useContext } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGoogle } from '@fortawesome/fontawesome-free-brands';
@@ -12,6 +12,12 @@ const useStyles = makeStyles(theme => ({
         margin: '50px auto',
         display: 'block',
         textAlign: 'center'
+    },
+    typography: {
+        padding: '20px 0'
+    },
+    paper: {
+        padding: theme.spacing(3)
     }
 }))
 
@@ -34,16 +40,23 @@ const Login = () => {
     }
 
     return (
-        <div className={classes.div}>
-            <Button
-                variant="contained"
-                color="primary"
-                startIcon={<FontAwesomeIcon icon={faGoogle} />}
-                onClick={handleGoogleSingIn}
-            >
-                Continue With Google
+
+        <Container maxWidth="md">
+            <Grid item lg={6} md={8} sm={10} xs={12} className={classes.div}>
+                <Paper className={classes.paper}>
+                    <Typography variant="h5" color="primary" className={classes.typography}>Login Here</Typography>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        startIcon={<FontAwesomeIcon icon={faGoogle} />}
+                        onClick={handleGoogleSingIn}
+                    >
+                        Continue With Google
             </Button>
-        </div>
+                </Paper>
+            </Grid>
+        </Container>
+
     );
 };
 

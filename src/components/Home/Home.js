@@ -1,5 +1,7 @@
 import { Container, Grid } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
+import SearchBar from '../SearchBar/SearchBar';
+import Spinner from '../Spinner/Spinner';
 import SingleProductCart from './SingleProductCart';
 
 const Home = () => {
@@ -11,12 +13,12 @@ const Home = () => {
     }, [])
     return (
         <Container maxWidth="lg">
-            <div style={{padding: '20px 0'}}>
-                Search bar goes here
-            </div>
+            <SearchBar />
             <Grid container spacing={4}>
                 {
-                    products.map(product => <SingleProductCart key={product._id} product={product} />)
+                    products.length
+                        ? products.map(product => <SingleProductCart key={product._id} product={product} />)
+                        : <Spinner />
                 }
             </Grid>
         </Container>

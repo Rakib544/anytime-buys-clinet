@@ -1,17 +1,17 @@
 import { AppBar, Button, IconButton, Menu, MenuItem, Toolbar, Typography } from '@material-ui/core';
-import { AccountCircle } from '@material-ui/icons';
-import React from 'react';
+import React, { useContext } from 'react';
 import { useStyles } from './NavbarStyle';
 import MenuIcon from '@material-ui/icons/Menu';
 import { useHistory } from 'react-router';
+import { UserContext } from '../../App';
 
 
 export const NavBar = () => {
+  const [loggedUser] = useContext(UserContext)
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
-  const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
   const handleProfileMenuOpen = (event) => {
@@ -20,11 +20,6 @@ export const NavBar = () => {
 
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
-  };
-
-  const handleMenuClose = () => {
-    setAnchorEl(null);
-    handleMobileMenuClose();
   };
 
   const handleMobileMenuOpen = (event) => {
@@ -49,23 +44,6 @@ export const NavBar = () => {
     history.push('/deals')
   }
 
-  //handling menu functionality
-  const menuId = 'primary-search-account-menu';
-  const renderMenu = (
-    <Menu
-      anchorEl={anchorEl}
-      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-      id={menuId}
-      keepMounted
-      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-      open={isMenuOpen}
-      onClose={handleMenuClose}
-    >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-    </Menu>
-  );
-
   //handling mobile menu functionality
   const mobileMenuId = 'primary-search-account-menu-mobile';
   const renderMobileMenu = (
@@ -77,7 +55,7 @@ export const NavBar = () => {
       transformOrigin={{ vertical: 'top', horizontal: 'right' }}
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
-    > 
+    >
       <MenuItem>
         <Button onClick={goToHomePage}>Home</Button>
       </MenuItem>
@@ -91,21 +69,22 @@ export const NavBar = () => {
         <Button onClick={goToAdminPage}>Admin</Button>
       </MenuItem>
       <MenuItem onClick={handleProfileMenuOpen}>
-        <IconButton
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit"
-        >
-          <AccountCircle />
-        </IconButton>
+        {
+          loggedUser.email ? (
+            <IconButton>
+              <img src={loggedUser.photoURL} alt={loggedUser.name} style={{ width: '30px', borderRadius: '50%' }} />
+            </IconButton>
+          ) : (
+            <Button onClick={goToLoginPage}>Login</Button>
+          )
+        }
       </MenuItem>
     </Menu>
   );
 
   return (
     <div className={classes.grow}>
-      <AppBar position="static">
+      <AppBar position="static" style={{backgroundColor: '#1B4F72'}}>
         <Toolbar>
           <IconButton
             edge="start"
@@ -119,20 +98,19 @@ export const NavBar = () => {
           </Typography>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
-            <Button onClick={goToHomePage}>Home</Button>
-            <Button onClick={goToOrdersPage}>Orders</Button>
-            <Button onClick={goToAdminPage}>Admin</Button>
-            <Button onClick={goToDealsPage}>Deals</Button>
-            <IconButton
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
-              color="inherit"
-            >
-              <AccountCircle />
-            </IconButton>
+            <Button onClick={goToHomePage} className={classes.button}>Home</Button>
+            <Button onClick={goToOrdersPage} className={classes.button}>Orders</Button>
+            <Button onClick={goToAdminPage} className={classes.button}>Admin</Button>
+            <Button onClick={goToDealsPage} className={classes.button}>Deals</Button>
+            {
+              loggedUser.email ? (
+                <IconButton>
+                  <img src={loggedUser.photoURL} alt={loggedUser.name} style={{ width: '30px', borderRadius: '50%' }} />
+                </IconButton>
+              ) : (
+                <Button onClick={goToLoginPage} className={classes.button}>Login</Button>
+              )
+            }
           </div>
           <div className={classes.sectionMobile}>
             <IconButton
@@ -148,7 +126,6 @@ export const NavBar = () => {
         </Toolbar>
       </AppBar>
       {renderMobileMenu}
-      {renderMenu}
     </div>
   );
 }
