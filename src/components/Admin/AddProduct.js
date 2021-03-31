@@ -46,7 +46,7 @@ const AddProduct = () => {
     const onSubmit = data => {
         if (imageURL !== null) {
             let productData = { imageURL, ...data }
-            fetch('http://localhost:8080/addProduct', {
+            fetch('https://cryptic-chamber-51709.herokuapp.com/addProduct', {
                 method: "POST",
                 headers: { "Content-type": 'application/json' },
                 body: JSON.stringify(productData)

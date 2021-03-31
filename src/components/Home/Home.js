@@ -7,7 +7,7 @@ import SingleProductCart from './SingleProductCart';
 const Home = () => {
     const [products, setProducts] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:8080/allProducts')
+        fetch('https://cryptic-chamber-51709.herokuapp.com/allProducts')
             .then(res => res.json())
             .then(products => setProducts(products))
     }, [])

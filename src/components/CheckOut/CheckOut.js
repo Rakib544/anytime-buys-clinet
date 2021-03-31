@@ -37,7 +37,7 @@ const CheckOut = () => {
         orderInfo.price = price;
         orderInfo.orderDate = new Date().toDateString()
 
-        fetch('http://localhost:8080/addOrder', {
+        fetch('https://cryptic-chamber-51709.herokuapp.com/addOrder', {
             method: 'POST',
             headers: { "Content-type": "application/json" },
             body: JSON.stringify(orderInfo)

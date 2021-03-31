@@ -17,7 +17,7 @@ const Orders = () => {
     const { email } = loggedUser;
 
     useEffect(() => {
-        fetch(`http://localhost:8080/orderHistory?email=${email}`)
+        fetch(`https://cryptic-chamber-51709.herokuapp.com/orderHistory?email=${email}`)
             .then(res => res.json())
             .then(data => setOrders(data))
     }, [email])
