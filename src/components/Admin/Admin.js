@@ -4,6 +4,9 @@ import CreateIcon from '@material-ui/icons/Create';
 import AddIcon from '@material-ui/icons/Add';
 import AppsIcon from '@material-ui/icons/Apps';
 import AddProduct from './AddProduct';
+import ManageProducts from './ManageProducts/ManageProducts';
+import { Route, Switch, useHistory, useRouteMatch } from 'react-router';
+import EditProducts from './EditProducts';
 
 
 const useStyles = makeStyles(theme => ({
@@ -28,27 +31,54 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const Admin = () => {
+    let { path, url } = useRouteMatch();
+    const history = useHistory()
     const classes = useStyles()
+    const goToManagePage = () => {
+        history.push(`${url}/manageProducts`)
+    }
+    const goToAddProductPage = () => {
+        history.push(`${url}/addProducts`)
+    }
+    const goToEditProductPage = () => {
+        history.push(`${url}/editProducts`)
+    }
     return (
-        <Grid container>
-            <Grid item lg={3} className={classes.leftSight}>
-                <Container className={classes.container}>
-                    <Typography variant="h4" align="center" className={classes.shopName}>
-                        Anytime Buys
+        <>
+            <Grid container>
+                <Grid item lg={3} className={classes.leftSight}>
+                    <Container className={classes.container}>
+                        <Typography variant="h4" align="center" className={classes.shopName}>
+                            Anytime Buys
                     </Typography>
-                    <div className={classes.buttonContainer}>
-                        <Button startIcon={<AppsIcon />} className={classes.button}>Manage Product</Button>
-                        <Button startIcon={<AddIcon />} className={classes.button}>Add Product</Button>
-                        <Button startIcon={<CreateIcon />} className={classes.button}>Edit Product</Button>
-                    </div>
-                </Container>
+                        <div className={classes.buttonContainer}>
+                            <Button onClick={goToManagePage} startIcon={<AppsIcon />} className={classes.button}>Manage Product</Button>
+                            <Button onClick={goToAddProductPage} startIcon={<AddIcon />} className={classes.button}>Add Product</Button>
+                            <Button onClick={goToEditProductPage} startIcon={<CreateIcon />} className={classes.button}>Edit Product</Button>
+                        </div>
+                    </Container>
+                </Grid>
+                <Grid item lg={9}>
+                    <Container>
+                        <Switch>
+                            <Route exact path={path}>
+                               <ManageProducts />
+                            </Route>
+                            <Route path={`${path}/addProducts`}>
+                                <AddProduct />
+                            </Route>
+                            <Route path={`${path}/manageProducts`}>
+                                <ManageProducts />
+                            </Route>
+                            <Route path={`${path}/editProducts`}>
+                                <EditProducts />
+                            </Route>
+                        </Switch>
+                    </Container>
+                </Grid>
             </Grid>
-            <Grid item lg={9}>
-                <Container>
-                    <AddProduct />
-                </Container>
-            </Grid>
-        </Grid>
+
+        </>
     );
 };
 

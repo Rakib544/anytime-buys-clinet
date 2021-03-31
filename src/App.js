@@ -4,6 +4,7 @@ import Admin from './components/Admin/Admin';
 import Deals from './components/Deals/Deals';
 import Home from './components/Home/Home';
 import Login from './components/Login/Login';
+import { NavBar } from './components/Navbar/Navbar';
 import NotFound from './components/NotFound/NotFound';
 import Orders from './components/Orders/Orders';
 
@@ -11,6 +12,7 @@ const App = () => {
   return (
     <div>
       <BrowserRouter>
+      <NavBar/>
         <Switch>
           <Route exact path="/">
             <Home />
