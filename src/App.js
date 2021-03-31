@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Admin from './components/Admin/Admin';
+import CheckOut from './components/CheckOut/CheckOut';
 import Deals from './components/Deals/Deals';
 import Home from './components/Home/Home';
 import Login from './components/Login/Login';
@@ -31,6 +32,9 @@ const App = () => {
           </Route>
           <Route path="/orders">
             <Orders />
+          </Route>
+          <Route path="/checkout/:id">
+            <CheckOut />
           </Route>
           <Route path="*">
             <NotFound />
