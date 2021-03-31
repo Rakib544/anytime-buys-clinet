@@ -1,6 +1,7 @@
 import { Button, Container, makeStyles, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@material-ui/core';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router';
+import { UserContext } from '../../App';
 
 const useStyles = makeStyles({
     table: {
@@ -24,7 +25,25 @@ const CheckOut = () => {
 
     }, [id])
 
-    const { productName, price } = product;
+    const { productName, price, imageURL } = product;
+
+    const [loggedUser] = useContext(UserContext);
+
+    const handleCheckOut = () => {
+        const orderInfo = {};
+        orderInfo.email = loggedUser.email;
+        orderInfo.imageURL = imageURL;
+        orderInfo.productName = productName;
+        orderInfo.price = price;
+        orderInfo.orderDate = new Date().toDateString()
+
+        fetch('http://localhost:8080/addOrder', {
+            method: 'POST',
+            headers: { "Content-type": "application/json" },
+            body: JSON.stringify(orderInfo)
+        })
+    }
+
     return (
         <Container maxWidth="md" style={{ marginTop: '40px' }}>
             <h1>Checkout</h1>
@@ -55,7 +74,7 @@ const CheckOut = () => {
                     </TableBody>
                 </Table>
             </TableContainer>
-            <Button variant="contained" color="primary" className={classes.button}>
+            <Button variant="contained" color="primary" className={classes.button} onClick={handleCheckOut}>
                 Checkout
             </Button>
         </Container>
