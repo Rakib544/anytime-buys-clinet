@@ -108,7 +108,11 @@ const AddProduct = () => {
                         </label>
                     </div>
                 </Paper>
-                <Button type="submit" className={classes.button}>save</Button>
+                {
+                   imageURL === null 
+                   ? <Button type="submit" disabled className={classes.button}>save</Button>
+                   :<Button type="submit" className={classes.button}>save</Button>
+                }
             </form>
 
         </>

@@ -1,4 +1,4 @@
-import { Container, Grid, Typography } from '@material-ui/core';
+import { Container, Grid } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
 import SearchBar from '../SearchBar/SearchBar';
 import Spinner from '../Spinner/Spinner';
