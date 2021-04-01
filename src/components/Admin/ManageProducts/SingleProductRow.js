@@ -10,7 +10,7 @@ const SingleProductRow = ({ product }) => {
     const handleDeleteProduct = (id) => {
         const obj = {id}
         console.log(id)
-        fetch('http://localhost:8080/deleteProduct', {
+        fetch('https://cryptic-chamber-51709.herokuapp.com/deleteProduct', {
             method: "DELETE",
             headers: { "Content-type": 'application/json' },
             body: JSON.stringify(obj)
