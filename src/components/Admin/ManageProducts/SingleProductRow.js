@@ -9,7 +9,7 @@ const SingleProductRow = ({ product }) => {
 
     const handleDeleteProduct = (id) => {
         const obj = {id}
-        console.log(id)
+        
         fetch('https://cryptic-chamber-51709.herokuapp.com/deleteProduct', {
             method: "DELETE",
             headers: { "Content-type": 'application/json' },

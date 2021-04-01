@@ -16,6 +16,13 @@ const useStyles = makeStyles(theme => ({
         display: 'flex',
         justifyContent: 'space-between',
         marginTop: '10px'
+    },
+    button: {
+        backgroundColor: '#1B4F72',
+        color: '#fff',
+        "&:hover": {
+            backgroundColor: '#1B4F72'
+        }
     }
 }))
 
@@ -40,7 +47,7 @@ const SingleProductCart = ({ product }) => {
                     <Typography variant="h6" className={classes.priceText}>
                         ${price}
                     </Typography>
-                    <Button color="primary" variant="contained" onClick={() => handleOrderItem(_id)}>Buy Now</Button>
+                    <Button className={classes.button} color="primary" variant="contained" onClick={() => handleOrderItem(_id)}>Buy Now</Button>
                 </div>
             </Paper>
         </Grid>

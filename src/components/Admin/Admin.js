@@ -12,6 +12,9 @@ import EditProducts from './EditProducts';
 const useStyles = makeStyles(theme => ({
     leftSight: {
         height: '100vh',
+        "@media (max-width: 900px)": {
+            height: '30vh'
+        },
         backgroundColor: '#1B4F72'
     },
     container: {
@@ -26,7 +29,13 @@ const useStyles = makeStyles(theme => ({
     },
     button: {
         margin: '5px',
-        color: '#fff'
+        color: '#fff',
+        "@media (max-width: 900px)" : {
+            width: '100%',
+            display: 'flex',
+            justifyContent: 'flex-start',
+            marginLeft: '30px'
+        }
     }
 }))
 
@@ -46,7 +55,7 @@ const Admin = () => {
     return (
         <>
             <Grid container>
-                <Grid item lg={3} className={classes.leftSight}>
+                <Grid item lg={3} md={3} sm={6} xs={12} className={classes.leftSight}>
                     <Container className={classes.container}>
                         <Typography variant="h4" align="center" className={classes.shopName}>
                             Anytime Buys
@@ -58,7 +67,7 @@ const Admin = () => {
                         </div>
                     </Container>
                 </Grid>
-                <Grid item lg={9}>
+                <Grid item lg={9} md={9} sm={6} xs={12}>
                     <Container>
                         <Switch>
                             <Route exact path={path}>

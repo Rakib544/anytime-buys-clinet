@@ -1,4 +1,4 @@
-import { makeStyles, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@material-ui/core';
+import { makeStyles, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
 import Spinner from '../../Spinner/Spinner';
 import SingleProductRow from './SingleProductRow';
@@ -13,6 +13,7 @@ const useStyles = makeStyles({
 const ManageProducts = () => {
     const classes = useStyles()
     const [products, setProducts] = useState([]);
+    const [showSpinner, setShowSpinner] = useState(true)
 
     useEffect(() => {
         fetch('https://cryptic-chamber-51709.herokuapp.com/allProducts')
@@ -20,6 +21,9 @@ const ManageProducts = () => {
             .then(products => setProducts(products))
     }, [])
 
+    setTimeout(() => {
+        setShowSpinner(false)
+    }, 10000)
     return (
         <>
             <h3>Manage Products</h3>
@@ -40,7 +44,7 @@ const ManageProducts = () => {
                                 ? (
                                     products.map(product => <SingleProductRow key={product._id} product={product} />)
                                 ): (
-                                    <Spinner />
+                                    showSpinner ? <Spinner /> : <Typography variant="subtitle1" style={{margin: '20px'}} align="center">No products found to show</Typography>
                                 )
                             }
                         </TableBody>

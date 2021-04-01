@@ -8,7 +8,10 @@ const useStyles = makeStyles(theme => ({
     paper: {
         padding: theme.spacing(3),
         display: 'flex',
-        justifyContent: 'space-around'
+        justifyContent: 'space-around',
+        "@media (max-width: 900px)" : {
+            display: 'block'
+        }
     },
     testField: {
         width: '100%',
