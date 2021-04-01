@@ -19,7 +19,7 @@ const CheckOut = () => {
     const { id } = useParams()
     const [product, setProduct] = useState({})
     useEffect(() => {
-        fetch(`http://localhost:8080/checkout/${id}`)
+        fetch(`https://cryptic-chamber-51709.herokuapp.com/checkout/${id}`)
             .then(res => res.json())
             .then(product => setProduct(product))
 
