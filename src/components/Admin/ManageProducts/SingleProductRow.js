@@ -16,6 +16,7 @@ const SingleProductRow = ({ product }) => {
             body: JSON.stringify(obj)
         })
     }
+      
     return (
         <TableRow >
             <TableCell component="th" scope="row">
